@@ -96,17 +96,11 @@ class add_vote(APIView):
 
     def post(self, request , *args, **kwargs):
         inpu = request.data
-        print(inpu)
         if not inpu:
             inpu['t'] = '1'
         inpu["user_id"] = request.user.pk
         inpu["pd_id"] = kwargs.get('pk')
-        print(inpu)
-        # try:
-        #     data = voteseri(inpu).data
-        # except:
-        #     return Response({"status": "invalid input"}, status=400)
-        
+
         rs = requests.post('http://172.23.0.3:8000/vote/' , json=inpu ).json()
         return Response(rs)
     
