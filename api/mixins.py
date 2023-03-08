@@ -13,8 +13,10 @@ class UserQuerySetMixin():
         user = self.request.user
         lookup_data[self.user_field] = user
         qs = super().get_queryset(*args , **kwargs)
+        qs2 = qs.filter(published=True)
 
         if user.is_staff and self.allow_staff_view:
             return qs
+        
 
-        return qs.filter(**lookup_data)
+        return (qs.filter(**lookup_data) | qs2).distinct()
