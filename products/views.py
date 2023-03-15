@@ -74,13 +74,16 @@ class productlistcreateapiview(
 list_create_product_view = productlistcreateapiview.as_view()
 
 class addcomment(
-    UserQuerySetMixin,
-    StaffEditorPermissionMixin,
     generics.CreateAPIView):
     serializer_class = commentser
-    queryset = products.objects.all()
-    
-    def perform_create(self, serializer):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request, *args , **kwargs):
+        pd = products.objects.filter(pk = kwargs.get('pk'))
+        if not pd:
+            return Response({"invalid":"this product doesn't exist !?"})
+        serializer = self.serializer_class(data= request.data)
+        serializer.is_valid(raise_exception= True)
         comm = serializer.validated_data.get('comment')
         data = {
             'user_id': self.request.user.pk,
@@ -92,12 +95,15 @@ class addcomment(
     
 add_comment_view = addcomment.as_view()
 
-class add_vote(APIView):
+class add_vote(generics.GenericAPIView):
+    serializer_class = voteseri
+    permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request , *args, **kwargs):
-        inpu = request.data
-        if not inpu:
-            inpu['t'] = '1'
+        pd = products.objects.filter(pk = kwargs.get('pk'))
+        if not pd:
+            return Response({"invalid":"this product doesn't exist !?"})
+        inpu = {}
         inpu["user_id"] = request.user.pk
         inpu["pd_id"] = kwargs.get('pk')
 

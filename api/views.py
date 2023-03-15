@@ -1,10 +1,12 @@
 import json
+from rest_framework import generics, permissions
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 #from django.http import JsonResponse
 from django.forms.models import model_to_dict
 from products.models import products
 from products.serializers import productserializer
+from .serializer import logoutserializer
 
 @api_view(["GET"])
 def aip_home(request , *args , **kwargs):
@@ -39,3 +41,15 @@ def api_home(request , *args , **kwargs):
 #     return JsonResponse(data)
 
 
+class logoutview(generics.GenericAPIView):
+    serializer_class = logoutserializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self , request):
+        serializer = self.serializer_class(data= request.data)
+        serializer.is_valid(raise_exception= True)
+        serializer.save()
+
+        return Response(status=204)
+    
+logoutAPIview = logoutview.as_view()

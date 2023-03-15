@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
+from rest_framework_simplejwt.tokens import RefreshToken, TokenError
 
 class productInLine(serializers.Serializer):
     url = serializers.HyperlinkedIdentityField(
@@ -35,3 +36,17 @@ class voteseri(serializers.Serializer):
         u_id = obj.get('user_id')
         qs = User.objects.filter(pk = u_id).first()
         return UserPublicSerializer(qs).data
+    
+class logoutserializer(serializers.Serializer):
+    refresh = serializers.CharField()
+
+    def validate(self , attrs):
+        self.token = attrs['refresh']
+        return attrs 
+
+    def save(self, **kwargs):
+        try:
+            RefreshToken(self.token).blacklist()
+
+        except TokenError:
+            self.fail("bad request!!!")
