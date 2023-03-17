@@ -13,7 +13,7 @@ class SearchListView(generics.GenericAPIView):
         user = None
         if request.user.is_authenticated:
             user = request.user.username
-        published = str(request.GET.get('published')) != "0"
+        published = str(request.GET.get('published')) not in ["0", "False"]
         # if not query:
         #     return Response("kkk" , status=400)
         result = client.perform_search(query , user=user , published=str(published))
