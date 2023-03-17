@@ -3,8 +3,8 @@
 
 -localhost:800/api/products --> to see all published and authenticated products or creat a new product
 
--localhost:800/api/products/(int:pk) --> see detail of the product with id = pk
--ex: localhost:800/api/products/1 
+-localhost:800/api/products/(int:pk) --> see detail of the product with id = pk.
+(ex: localhost:800/api/products/1) 
 
 -localhost:800/api/products/(int:pk)/update --> to update product with id = pk 
 
