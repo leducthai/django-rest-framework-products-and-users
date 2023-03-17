@@ -1,6 +1,6 @@
 -open the terminal in the direction that contain doker-compose.yml file run (make sure you already install docker) : docker-compose up
 
--note: you have to run the comment and vote server to fully function https://github.com/leducthai/django-rest-framework-comment-vote
+-note: you have to run the comment and vote server to fully functional https://github.com/leducthai/django-rest-framework-comment-vote
 
 
 -localhost:800/api/products --> to see all published and authenticated products or creat a new product
