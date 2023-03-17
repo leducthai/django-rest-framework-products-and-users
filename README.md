@@ -16,7 +16,7 @@
 
 -localhost:800/api/products/(int:pk)/vote --> add vote/unvote the product with id = pk
 
--localhost:800/api/search/?q=thai&published=True --> support searching product with title or content that include the word "thai" (you can always use other word or phrase) and published = True
+-localhost:800/api/search/?q=thai&published=True --> support searching product with title or content that include the word "thai" (you can always use other word or phrase) and published = True (you can use '0' or 'False' to denote False)
 
 
 
