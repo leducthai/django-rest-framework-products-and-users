@@ -2,8 +2,7 @@
 
 -note: you have to run the comment and vote server to fully functional https://github.com/leducthai/django-rest-framework-comment-vote
 
--to create super admin, run : docker exec -it <container_id> bash
-    - then run : python manage.py createsuperuser (input name and password)
+-to create super admin, run : "docker exec -it <container_id> bash" --> then inside the container run : " python manage.py createsuperuser " (input name and password)
 
 -localhost:800/admin --> admin page
 
