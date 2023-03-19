@@ -50,3 +50,7 @@ class logoutserializer(serializers.Serializer):
 
         except TokenError:
             self.fail("bad request!!!")
+
+class signupAPIseri(serializers.Serializer):
+    username = serializers.CharField()
+    password = serializers.CharField()

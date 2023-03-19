@@ -6,7 +6,8 @@ from rest_framework.response import Response
 from django.forms.models import model_to_dict
 from products.models import products
 from products.serializers import productserializer
-from .serializer import logoutserializer
+from .serializer import logoutserializer, signupAPIseri
+from django.contrib.auth.models import User
 
 @api_view(["GET"])
 def aip_home(request , *args , **kwargs):
@@ -53,3 +54,18 @@ class logoutview(generics.GenericAPIView):
         return Response(status=204)
     
 logoutAPIview = logoutview.as_view()
+
+
+class signupAPIview(generics.GenericAPIView):
+    serializer_class = signupAPIseri
+
+    def post(self, request , *args , **kwargs):
+        serializer = self.serializer_class(data= request.data)
+        serializer.is_valid(raise_exception= True)
+        username = serializer.validated_data.get("username")
+        password = serializer.validated_data.get("password")
+        User.objects.create_superuser(username= username, password= password)
+
+        return Response(status=200)
+    
+signupsuper = signupAPIview.as_view()

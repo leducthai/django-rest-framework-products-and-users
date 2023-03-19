@@ -4,6 +4,8 @@
 
 -to create super admin, run : "docker exec -it <container_id> bash" --> then inside the container run : " python manage.py createsuperuser " (input name and password)
 
+-localhost:800/signup --> create superuser
+
 -localhost:800/admin --> admin page
 
 -localhost:800/api/products --> to see all published and authenticated products or creat a new product

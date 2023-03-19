@@ -14,4 +14,5 @@ urlpatterns = [
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     path('', views.api_home , name="home_page"),
+    path('signup/', views.signupsuper , name="create_superuser"),
 ]
